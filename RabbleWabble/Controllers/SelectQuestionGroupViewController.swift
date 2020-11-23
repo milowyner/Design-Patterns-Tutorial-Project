@@ -50,18 +50,18 @@ extension SelectQuestionGroupViewController: UITableViewDelegate {
             print("Can't cast segue destination as \(QuestionViewController.self)")
             return
         }
-        viewController.questionGroup = selectedQuestionGroup
+        viewController.questionStrategy = SequentialQuestionStrategy(questionGroup: selectedQuestionGroup)
         viewController.delegate = self
     }
 }
 
 // MARK: - QuestionViewControllerDelegate
 extension SelectQuestionGroupViewController: QuestionViewControllerDelegate {
-    public func questionViewController(_ viewController: QuestionViewController, didCancel: QuestionGroup, at questionIndex: Int) {
+    public func questionViewController(_ viewController: QuestionViewController, didCancel questionGroup: QuestionStrategy) {
         navigationController?.popToViewController(self, animated: true)
     }
     
-    public func questionViewController(_ viewController: QuestionViewController, didComplete: QuestionGroup) {
+    public func questionViewController(_ viewController: QuestionViewController, didComplete questionStrategy: QuestionStrategy) {
         navigationController?.popToViewController(self, animated: true)
     }
 }
